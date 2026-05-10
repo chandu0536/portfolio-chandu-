@@ -35,7 +35,7 @@ function Navbar({ activeSection }) {
           </li>
         ))}
       </ul>
-      <button className="hamburger" onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
+      <button className={`hamburger ${menuOpen ? 'open' : ''}`} onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
         <span /><span /><span />
       </button>
     </nav>
@@ -116,7 +116,7 @@ function HomeSection() {
         <FadeUp delay={200}>
           <p className="hero-role-label">And I'm a</p>
           <p className="hero-role">
-            <TypingText texts={['Web Developer', 'Data & AI Enthusiast', 'Frontend Developer', 'Java Developer']} />
+            <TypingText texts={['Web Developer', 'Data & AI Enthusiast', 'Frontend Developer']} />
           </p>
         </FadeUp>
         <FadeUp delay={300}>
@@ -318,7 +318,7 @@ function CertificationsSection() {
       <div className="certs-list">
         {certs.map((c, i) => (
           <FadeUp key={c.title} delay={i * 70}>
-            <div className="cert-card" onClick={() => c.img && setLightbox(c)} style={{ cursor: 'pointer', alignItems: 'center' }}>
+            <div className="cert-card" onClick={() => c.img && setLightbox(c)} style={{ cursor: 'pointer' }}>
               <div className="cert-image-thumb" style={{ width: '140px', height: '90px', borderRadius: '8px', overflow: 'hidden', border: `1.5px solid ${c.color}55`, flexShrink: 0 }}>
                 {c.img ? (
                   <img src={c.img} alt={c.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -411,7 +411,7 @@ function ResumeSection() {
 
       <div className="resume-container">
         <FadeUp delay={80}>
-          <a href="#" className="resume-download-btn" onClick={e => e.preventDefault()}>
+          <a href="/resume.pdf" download="Chandra_Kiran_Resume.pdf" className="resume-download-btn" target="_blank" rel="noopener noreferrer">
             ⬇️ &nbsp;Download Resume
           </a>
         </FadeUp>
@@ -498,11 +498,11 @@ function BackgroundAnimation() {
           const x = e.clientX;
           const width = window.innerWidth;
           const percent = x / width; // 0.0 to 1.0
-          
+
           let nextFrame = Math.ceil(percent * totalFrames);
           if (nextFrame < 1) nextFrame = 1;
           if (nextFrame > totalFrames) nextFrame = totalFrames;
-          
+
           setFrameIndex(nextFrame);
           ticking = false;
         });
@@ -527,8 +527,8 @@ function BackgroundAnimation() {
       pointerEvents: 'none',
       overflow: 'hidden'
     }}>
-      <img 
-        src={`/animation/ezgif-frame-${currentFrameStr}.jpg`} 
+      <img
+        src={`/animation/ezgif-frame-${currentFrameStr}.jpg`}
         alt=""
         style={{
           width: '100%',
@@ -581,7 +581,7 @@ export default function App() {
         <ContactSection />
       </main>
       <footer className="footer">
-        <p>© 2024 <span>Chandra Kiran Gurugubelli</span>. Built with ❤️ using React & Vite.</p>
+        <p><span>Chandra Kiran Gurugubelli</span></p>
       </footer>
     </>
   );

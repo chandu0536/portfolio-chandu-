@@ -5,18 +5,23 @@
 }
 
 :root {
-  --bg-primary: #0a0a0f;
+  --bg-primary: #08080c;
   --bg-secondary: #0f0f1a;
-  --bg-card: #13131f;
+  --bg-card: rgba(19, 19, 31, 0.55);
   --accent-blue: #3b82f6;
   --accent-blue-light: #60a5fa;
-  --accent-blue-dark: #1d4ed8;
-  --accent-glow: rgba(59, 130, 246, 0.3);
-  --text-primary: #ffffff;
-  --text-secondary: #a0aec0;
-  --text-muted: #6b7280;
-  --border: rgba(59, 130, 246, 0.15);
+  --accent-blue-dark: #2563eb;
+  --accent-glow: rgba(59, 130, 246, 0.35);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --border: rgba(59, 130, 246, 0.2);
   --nav-height: 70px;
+}
+
+.about-info-item, .edu-card, .skill-category, .project-card, .contact-card, .skill-rated-card, .cert-card, .lightbox-box {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 html {
@@ -205,7 +210,7 @@ section {
 
 .btn-primary {
   padding: 13px 32px;
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+  background: linear-gradient(135deg, var(--accent-blue), #6366f1);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -217,12 +222,12 @@ section {
   align-items: center;
   gap: 8px;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(59,130,246,0.35);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(59,130,246,0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(99, 102, 241, 0.55);
 }
 
 .btn-outline {
@@ -843,7 +848,7 @@ section {
   border-radius: 14px;
   padding: 20px 24px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 18px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -1100,6 +1105,11 @@ section {
   transform: translateY(0);
 }
 
+/* HAMBURGER ANIMATION */
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
 /* Responsive */
 @media (max-width: 900px) {
   #home {
@@ -1112,13 +1122,88 @@ section {
   #about { flex-direction: column; }
   .about-left { position: static; width: 100%; display: flex; justify-content: center; }
   .about-info-grid { grid-template-columns: 1fr; }
-  .nav-links { gap: 1.2rem; }
   section { padding: calc(var(--nav-height) + 40px) 5% 60px; }
   .navbar { padding: 0 5%; }
+  
+  .hamburger {
+    display: flex;
+    z-index: 1001;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 15, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 2rem 0;
+    height: calc(100vh - var(--nav-height));
+    transform: translateY(-150%);
+    transition: transform 0.3s ease;
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .cert-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .cert-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cert-card > div:last-child {
+    align-items: center !important;
+  }
+  
+  .skills-rated-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .education-list {
+    gap: 16px;
+  }
+  
+  .resume-section-title {
+    text-align: center;
+  }
 }
 
 @media (max-width: 600px) {
-  .nav-links { display: none; }
   .hero-name { font-size: 1.7rem; }
   .section-title { font-size: 1.5rem; }
+  .hero-role { font-size: 1.2rem; }
+  .hero-cta { flex-direction: column; width: 100%; }
+  .hero-cta .btn-primary,
+  .hero-cta .btn-outline { width: 100%; justify-content: center; }
+  .contact-grid { grid-template-columns: 1fr; }
+  
+  .resume-download-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
